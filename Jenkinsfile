@@ -1,23 +1,25 @@
 pipeline {
     agent any
-
     stages {
-        stage('compile code') {
+        stage('code compile') {
             steps {
-                //sh 'npm install'
-                echo 'Hello World'
+               //sh 'npm install'
+               print 'OK'
             }
         }
-        stage('test') {
+        stage('test cases') {
             steps {
-                // sh 'npm test'
-                echo 'Hello World'
+               //sh 'npm test'
+               print 'OK'
             }
         }
         stage('code quality') {
+            //parameters {
+            //    password(name: 'SONAR.PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
+            //}
             steps {
-                // sh 'sonar qube command'
-                echo 'Hello World'
+               //sh 'sonar command'
+               print 'OK'
             }
         }
         stage('code security') {
@@ -25,15 +27,20 @@ pipeline {
                 expression { env.BRANCH_NAME == "main" }
             }
             steps {
-                echo 'we go there'
+               //sh 'checks with SAST & SCA'
+               print 'OK'
             }
         }
         stage('Release') {
             when {
-                expression { env.TAG_NAME ==~ ".*" }
+                expression { env.TAG_NAME ==~ ".*"}
             }
+            //parameters {
+            //    password(name: 'NEXUS.PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
+            //}
             steps {
-                echo 'Hello World'
+               //sh 'Upload artifact to nexus repo'
+               print 'OK'
             }
         }
     }
