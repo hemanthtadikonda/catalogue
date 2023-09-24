@@ -34,7 +34,7 @@ pipeline {
             //    password(name: 'SONAR.PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
             //}
             steps {
-                sh 'sonar-scanner -Dsonar.host.url=http://172.31.92.107:9000 -Dsonar.login=admin -Dsonar.password=password -Dsonar.projectKey=catalogue'
+                sh 'sonar-scanner -Dsonar.host.url=http://172.31.92.107:9000 -Dsonar.login=admin -Dsonar.password=admin123 -Dsonar.projectKey=catalogue'
                 print 'OK'
             }
         }
