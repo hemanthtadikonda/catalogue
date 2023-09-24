@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    parameters {
+        password(name: 'SONAR-PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
+    }
 
     stages {
         stage('code compile') {
@@ -30,9 +33,7 @@ pipeline {
                     expression { env.TAG_NAME == null }
                 }
             }
-            parameters {
-                password(name: 'SONAR-PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
-            }
+
             steps {
                 sh 'sonar-scanner -Dsonar.host.url=http://172.31.92.107:9000 -Dsonar.login=admin -Dsonar.password=${params.SONAR-PASSWORD} -Dsonar.projectKey=catalogue'
                 print 'OK'
