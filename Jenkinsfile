@@ -2,7 +2,6 @@ pipeline {
     agent any
     parameters {
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
-        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
     }
 
     stages {
@@ -10,8 +9,7 @@ pipeline {
             steps {
                 //sh 'env'
                 //sh 'npm install'
-                echo "Password: ${params.PASSWORD}"
-                echo "Hello ${params.PERSON}"
+
                 print 'OK'
             }
         }
@@ -38,7 +36,7 @@ pipeline {
             }
 
             steps {
-                //sh 'sonar-scanner -Dsonar.host.url=http://172.31.92.107:9000 -Dsonar.login=admin -Dsonar.password=${params.SONAR-PASSWORD} -Dsonar.projectKey=catalogue'
+                sh 'sonar-scanner -Dsonar.host.url=http://172.31.92.107:9000 -Dsonar.login=admin -Dsonar.password="${params.PASSWORD}" -Dsonar.projectKey=catalogue'
                 print 'OK'
             }
         }
