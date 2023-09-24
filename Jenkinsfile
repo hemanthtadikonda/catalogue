@@ -2,14 +2,16 @@ pipeline {
     agent any
     parameters {
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
+        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
     }
 
     stages {
         stage('code compile') {
             steps {
-                sh 'env'
+                //sh 'env'
                 //sh 'npm install'
                 echo "Password: ${params.PASSWORD}"
+                echo "Hello ${params.PERSON}"
                 print 'OK'
             }
         }
