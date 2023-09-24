@@ -36,7 +36,7 @@ pipeline {
             }
 
             steps {
-                sh 'sonar-scanner -Dsonar.host.url=http://172.31.92.107:9000 -Dsonar.login=admin -Dsonar.password="${params.PASSWORD}" -Dsonar.projectKey=catalogue'
+                sh "sonar-scanner -Dsonar.host.url=http://172.31.92.107:9000 -Dsonar.login=admin -Dsonar.password=${params.PASSWORD} -Dsonar.projectKey=catalogue"
                 print 'OK'
             }
         }
