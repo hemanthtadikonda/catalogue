@@ -1,75 +1,22 @@
-pipeline {
-    agent any
-    parameters {
-        password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
-    }
+node {
+   stage ('compile code') {
+      print 'OK'
+      // sh 'compile command based on code type'
+   }
+   stage ('test') {
+      print 'OK'
+      // sh 'unit test command based on code type'
+   }
+   stage ('code Quality') {
+      print 'OK'
+      // sh 'sonar command based on code type'
+   }
+   stage ('code security') {
+      print 'OK'
+      // sh 'checkmarx sast & sca test'
+   }
+   stage ('release') {
+      print 'OK'
+      // sh 'nexus command '
+   }
 
-    stages {
-        stage('code compile') {
-            steps {
-                //sh 'env'
-                //sh 'npm install'
-
-                print 'OK'
-            }
-        }
-
-        stage('Test cases') {
-            when  {
-                allOf {
-                    expression { env.BRANCH_NAME != null }
-                    expression { env.TAG_NAME == null }
-                }
-            }
-            steps {
-                //sh 'npm test'
-                print 'OK'
-            }
-        }
-
-        stage ('code quality') {
-            when {
-                allOf {
-                    expression { env.BRANCH_NAME != null }
-                    expression { env.TAG_NAME == null }
-                }
-            }
-
-            steps {
-                sh "sonar-scanner -Dsonar.host.url=http://172.31.92.107:9000 -Dsonar.login=admin -Dsonar.password=${params.PASSWORD} -Dsonar.projectKey=catalogue"
-                print 'OK'
-            }
-        }
-
-        stage ('code security') {
-            when {
-                allOf {
-                    expression { env.BRANCH_NAME == "main"}
-                    expression { env.TAG_NAME    == null}
-                }
-            }
-            //parameters {
-            //    password(name: 'SONAR.PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
-            //}
-            steps {
-                //sh 'checkmarx sast sca'
-                print 'OK'
-            }
-        }
-
-        stage ('Release App') {
-            when {
-                expression {env.TAG_NAME ==~ ".*"}
-            }
-            //parameters {
-            //    password(name: 'NEXUS.PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
-            //}
-            steps {
-                // sh 'upload artifact to nexus command
-                print 'Ok-Ok'
-            }
-
-        }
-    }
-
-}
