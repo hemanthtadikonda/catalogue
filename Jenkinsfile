@@ -19,4 +19,5 @@ node {
       print 'OK'
       // sh 'nexus command '
    }
+}
 
