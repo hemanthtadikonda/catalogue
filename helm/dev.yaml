@@ -1,0 +1,7 @@
+component: catalogue
+port: 8080
+PARAMETERS: catalogue.dev.MONGO_URL,MONGO_URL catalogue.dev.DOCUMENTDB,DOCUMENTDB
+env: dev
+schema:
+  enabled: true
+  DB_TYPE: docdb
